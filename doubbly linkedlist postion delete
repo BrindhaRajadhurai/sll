@@ -1,0 +1,82 @@
+import java.util.*;
+class linked {
+    Node head;
+    Node tail;
+
+    class Node {
+        int data;
+        Node next;
+        Node prev;
+
+        Node(int val) {
+            data = val;
+            next = null;
+            prev = null;
+        }
+    }
+
+    linked() {
+        head = null;
+        tail = null;
+    }
+
+    public void insertend(int val) {
+        Node newnode = new Node(val);
+        if (head == null) {
+            head = newnode;
+            tail = newnode;
+        } else {
+            tail.next = newnode;
+            newnode.prev = tail;
+            tail = newnode;
+        }
+    }
+
+    public void deletebegin() {
+        head.next.prev = null;
+        head = head.next;
+    }
+
+    public void deleteend() {
+        tail = tail.prev;
+        tail.next = null;
+    }
+
+    public void deletepos(int pos) {
+        Node t = head;
+        Node prev = null;
+        for (int i = 0; i < pos; i++) {
+            prev = t;
+            t = t.next;
+        }
+            t.next.prev = t.prev;
+            t.prev.next = t.next;
+
+        }
+        
+    public void display() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + "-->");
+            temp = temp.next;
+        }
+        System.out.println("Null");
+    }
+
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        linked list = new linked();
+        int m = sc.nextInt();
+        for (int i = 0; i < m; i++) {
+            int val = sc.nextInt();
+            list.insertend(val);
+        }
+        list.display();
+        list.deletebegin();
+        list.display();
+        list.deleteend();
+        list.display();
+        int pos = sc.nextInt();
+        list.deletepos(pos);
+        list.display();
+    }
