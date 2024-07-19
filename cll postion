@@ -1,0 +1,80 @@
+import java.util.*;
+class Linkedlist {
+    Node head;
+
+    class Node {
+        int data;
+        Node next;
+        //Node head;
+
+        Node(int val) {
+            data = val;
+            next = null;
+            //head = null;
+        }
+    }
+
+    Linkedlist() {
+        head = null;
+    }
+
+    public void insertend(int val) {
+        Node newnode = new Node(val);
+
+        if (head == null) {
+            newnode.next = newnode;
+            head = newnode;
+        } else {
+            newnode.next = head.next;
+            head.next = newnode;
+            head = newnode;
+        }
+    }
+
+    /*public void insertbegin(int val) {
+        Node nn = new Node(val);
+        if (head == null) {
+            nn.next = nn;
+            head = nn;
+        } else {
+            nn.next = head.next;
+            head.next = nn;
+        }
+    }*/
+
+    public void position(int val, int pos) {
+        Node nn = new Node(val);
+        Node c = head;
+        for (int i = 0; i < pos; i++) {
+            c = c.next;
+        }
+        nn.next = c.next;
+        c.next = nn;
+    }
+    public void display(){
+        Node temp = head.next;
+
+        do
+        {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        while(temp!=head.next);
+    }
+    public static void main(String args[]){
+        Scanner sc = new Scanner (System.in);
+        Linkedlist list = new Linkedlist();
+
+        int m = sc.nextInt();
+        for (int i =0 ;i<m;i++){
+            int val = sc.nextInt();
+            list.insertend(val);
+            //list.insertbegin(val);
+        }
+        list.display();
+        int val=sc.nextInt();
+        int pos=sc.nextInt();
+        list.position(val,pos);
+        list.display();
+    }
+}
