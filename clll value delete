@@ -1,0 +1,100 @@
+import java.util.*;
+class Linkedlist {
+    Node head;
+
+    class Node {
+        int data;
+        Node next;
+        //Node head;
+
+        Node(int val) {
+            data = val;
+            next = null;
+            //head = null;
+        }
+    }
+
+    Linkedlist() {
+        head = null;
+    }
+
+    public void insertend(int val) {
+        Node newnode = new Node(val);
+
+        if (head == null) {
+            newnode.next = newnode;
+            head = newnode;
+        } else {
+            newnode.next = head.next;
+            head.next = newnode;
+            head = newnode;
+        }
+    }
+    public void deletebegin()
+    {
+        head.next=head.next.next;
+
+    }
+    public void deleteend()
+    {
+        Node t=head.next;
+        while(t.next!=head)
+        {
+            t=t.next;
+        }
+        t.next=head.next;
+        head=t;
+
+    }
+    void dpos(int val) {
+        Node temp1 = head.next;
+        Node temp2 = head.next;
+        if (temp1.data == val)
+            head.next = temp1.next;
+        else {
+            for (temp1 = head.next.next; temp1 != head; temp1 = temp1.next) {
+                if (temp1.data == val)
+                    temp2.next = temp1.next;
+                temp2 = temp2.next;
+            }
+        }
+    }
+    public void deletepos(int pos) {
+        Node temp = head.next;
+        Node prev = null;
+        for (int i = 0; i < pos; i++) {
+            prev = temp;
+            temp = temp.next;
+        }
+        prev.next = temp.next;
+    }
+    public void display(){
+        Node temp = head.next;
+
+        do
+        {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        while(temp!=head.next);
+    }
+    public static void main(String args[]){
+        Scanner sc = new Scanner (System.in);
+        Linkedlist list = new Linkedlist();
+
+        int m = sc.nextInt();
+        for (int i =0 ;i<m;i++) {
+            int val = sc.nextInt();
+            list.insertend(val);
+        }
+        list.deleteend();
+        list.deletebegin();
+        list.display();
+        int pos=sc.nextInt();
+        list.deletepos(pos);
+        list.display();
+        int val=sc.nextInt();
+        list.dpos(val);
+        list.display();
+    }
+}
