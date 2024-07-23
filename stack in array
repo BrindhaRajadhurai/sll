@@ -1,0 +1,52 @@
+import java.util.*;
+class stack{
+    int [] s = new int[9];
+    int top;
+
+    stack(){
+        top = -1;
+    }
+    void push(int val){
+
+        if (top == 9){
+            System.out.print("Stack is full");
+        }
+        else{
+            s[++top] = val;
+        }
+    }
+    int pop(){
+        if(top>=0){
+            return s[top--];
+
+        }
+        return -1;
+    }
+    void peak(){
+        System.out.println("Peak = "+s[top]);
+    }
+    void display(){
+        for(int i =0;i<top+1;i++){
+            System.out.print(s[i]+" ");
+        }
+    }
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        stack s1 = new stack();
+        while(true)
+        {
+            int v=sc.nextInt();
+            if(v==-1)
+                break;
+            s1.push(v);
+        }
+        s1.display();
+        System.out.println();
+        s1.pop();
+        s1.pop();
+        s1.display();
+
+        System.out.println();
+        s1.peak();
+    }
+}
